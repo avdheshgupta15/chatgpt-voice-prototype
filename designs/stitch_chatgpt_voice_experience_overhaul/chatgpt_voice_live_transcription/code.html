@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ChatGPT Voice Mode</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Font: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- BEGIN: Custom Orb Animations and Utilities -->
+<style data-purpose="animations">
+    @keyframes pulseFluid {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1) drop-shadow(0 0 25px rgba(96, 165, 250, 0.45));
+      }
+      50% {
+        transform: scale(1.05) rotate(180deg);
+        filter: brightness(1.15) drop-shadow(0 0 45px rgba(147, 197, 253, 0.65));
+      }
+    }
+
+    @keyframes liveTypingPulse {
+      0%, 100% { opacity: 0.2; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .animate-voice-orb {
+      animation: pulseFluid 10s ease-in-out infinite alternate;
+    }
+
+    .speech-dot-1 {
+      animation: liveTypingPulse 1.4s infinite ease-in-out 0s;
+    }
+    .speech-dot-2 {
+      animation: liveTypingPulse 1.4s infinite ease-in-out 0.2s;
+    }
+    .speech-dot-3 {
+      animation: liveTypingPulse 1.4s infinite ease-in-out 0.4s;
+    }
+  </style>
+<style data-purpose="typography-and-scroll">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hide scrollbar for a clean mobile canvas presentation */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Gradient backdrop for animated orb matching screenshot */
+    .chatgpt-orb-bg {
+      background: radial-gradient(circle at 50% 50%, #70a6ff 0%, #447cf0 38%, #3264d8 65%, #2441a7 100%);
+    }
+
+    .orb-cloud-texture {
+      background: radial-gradient(circle at 65% 65%, rgba(255, 255, 255, 0.95) 0%, rgba(220, 235, 255, 0.75) 25%, rgba(135, 175, 255, 0.25) 55%, transparent 70%);
+      mix-blend-mode: screen;
+    }
+  </style>
+<!-- END: Custom Orb Animations and Utilities -->
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen p-0 sm:p-4 select-none">
+<!-- BEGIN: Mobile Device Frame (iPhone 15: 393 x 852 px) -->
+<main class="relative w-[393px] h-[852px] bg-black text-white overflow-hidden shadow-2xl sm:rounded-[52px] border sm:border-zinc-800 flex flex-col justify-between" data-purpose="mobile-viewport">
+<!-- BEGIN: iOS Native Top Bar -->
+<header class="relative z-30 pt-3 px-7 flex flex-col w-full" data-purpose="ios-top-system-bar">
+<!-- Status bar metrics -->
+<div class="flex justify-between items-center text-sm font-semibold tracking-tight text-white h-7">
+<!-- iOS Time -->
+<span class="text-[15px] font-semibold tracking-normal pl-1">8:48</span>
+<!-- Dynamic Island / Sensor Indicator pill -->
+<div class="w-2 h-2 rounded-full bg-amber-500 shadow-sm" title="Active Microphone"></div>
+<!-- System Icons (Signal, Wifi, Battery) -->
+<div class="flex items-center space-x-1.5 pr-0.5">
+<!-- Cellular Signal -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 17 12">
+<rect height="3" rx="0.6" width="2.5" x="0" y="9"></rect>
+<rect height="6" rx="0.6" width="2.5" x="3.5" y="6"></rect>
+<rect height="9" rx="0.6" width="2.5" x="7" y="3"></rect>
+<rect fill-opacity="0.4" height="12" rx="0.6" width="2.5" x="10.5" y="0"></rect>
+</svg>
+<!-- Wi-Fi Icon -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 16 12">
+<path d="M8 2.8C5.2 2.8 2.6 3.9 0.7 5.7L0 4.9C2.1 2.9 4.9 1.7 8 1.7C11.1 1.7 13.9 2.9 16 4.9L15.3 5.7C13.4 3.9 10.8 2.8 8 2.8ZM8 6C6.1 6 4.4 6.8 3.1 8L2.4 7.2C3.9 5.8 5.9 5 8 5C10.1 5 12.1 5.8 13.6 7.2L12.9 8C11.6 6.8 9.9 6 8 6ZM8 9.2C7 9.2 6.1 9.6 5.4 10.3L8 12.9L10.6 10.3C9.9 9.6 9 9.2 8 9.2Z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="flex items-center">
+<div class="w-[21px] h-[10.5px] border border-white/80 rounded-[3.5px] p-[1.5px] flex items-center">
+<div class="h-full w-full bg-white rounded-[1.5px]"></div>
+</div>
+<div class="w-[1.2px] h-[3.8px] bg-white/70 rounded-r-sm ml-[1px]"></div>
+</div>
+</div>
+</div>
+<!-- Action Navigation Buttons (Menu & Settings) -->
+<nav aria-label="Quick Actions" class="flex justify-between items-center mt-3">
+<!-- Sidebar Navigation Button -->
+<button aria-label="Open Sidebar Menu" class="w-11 h-11 rounded-full bg-[#1c1c1e]/90 hover:bg-[#2c2c2e] border border-zinc-800/80 flex items-center justify-center transition-transform active:scale-95" type="button"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line></svg></button>
+<!-- Voice & Audio Configuration Button -->
+<button aria-label="Audio and Voice Settings" class="w-11 h-11 rounded-full bg-[#1c1c1e]/90 hover:bg-[#2c2c2e] border border-zinc-800/80 flex items-center justify-center transition-transform active:scale-95" type="button"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="8" x2="20" y2="8"></line><circle cx="9" cy="8" r="2.5" fill="#1c1c1e" stroke="currentColor" stroke-width="2.2"></circle><line x1="4" y1="16" x2="20" y2="16"></line><circle cx="15" cy="16" r="2.5" fill="#1c1c1e" stroke="currentColor" stroke-width="2.2"></circle></svg></button>
+</nav>
+</header>
+<!-- END: iOS Native Top Bar -->
+<!-- BEGIN: Voice Mode Central Sphere / Ambient Audio Visualizer -->
+<section aria-label="ChatGPT Voice Visualizer" class="relative z-10 flex flex-col items-center justify-center flex-grow -mt-4 px-6">
+<!-- Ambient Orb Container -->
+<div class="relative flex items-center justify-center w-[210px] h-[210px] sm:w-[224px] sm:h-[224px]" data-purpose="voice-interactive-orb">
+<!-- Ambient Glow Aura -->
+<div class="absolute inset-0 rounded-full bg-blue-500/25 blur-3xl scale-125 pointer-events-none"></div>
+<!-- The Blue-White Watercolor Fluid Orb -->
+<div class="relative w-full h-full rounded-full overflow-hidden shadow-2xl animate-voice-orb chatgpt-orb-bg">
+<!-- Fluid cloudy watercolor highlight overlay 1 -->
+<div class="absolute inset-0 orb-cloud-texture opacity-95"></div>
+<!-- Secondary subtle organic cloud glow -->
+<div class="absolute -bottom-6 -left-6 w-48 h-48 rounded-full bg-white/40 blur-xl"></div>
+<!-- Outer luminous specular border -->
+<div class="absolute inset-0 rounded-full border border-white/20 pointer-events-none"></div>
+</div>
+</div>
+<!-- BEGIN: Real-Time Live Transcription Overlay -->
+<div class="w-full mt-7 max-h-[220px] overflow-y-auto no-scrollbar flex flex-col space-y-3.5 px-2 text-left" data-purpose="live-transcript-stream">
+<!-- User Turn Transcription -->
+<article class="flex flex-col space-y-1">
+<header class="flex items-center space-x-2">
+<span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Aagam</span>
+</header>
+<p class="text-[14px] leading-snug text-zinc-300 font-normal">
+            "Hey ChatGPT, what's a quick way to remember Porter's Five Forces before my strategy exam?"
+          </p>
+</article>
+<!-- Assistant Response Transcription -->
+<article class="flex flex-col space-y-1">
+<header class="flex items-center space-x-2">
+<span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">ChatGPT</span>
+</header>
+<p class="text-[14px] leading-snug text-zinc-300 font-normal">
+            "Try the acronym <span class="text-white font-medium">'CRIST'</span> — Competitive rivalry, Rivalry... want me to make a mnemonic sentence instead?"
+          </p>
+</article>
+<!-- Live Active Response Turn -->
+<article class="flex flex-col space-y-1 bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5 backdrop-blur-sm">
+<header class="flex items-center justify-between">
+<span class="text-xs font-semibold text-zinc-300 uppercase tracking-wider">Aagam</span>
+<!-- Live voice pulsing indicator -->
+<div aria-label="Listening to speech" class="flex items-center space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 speech-dot-1"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 speech-dot-2"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 speech-dot-3"></span>
+</div>
+</header>
+<p class="text-[14px] leading-snug text-white font-medium flex items-center">
+<span class="">"Yeah, do that."</span>
+<span class="inline-block w-1.5 h-3.5 bg-blue-400 ml-1.5 animate-pulse rounded-full"></span>
+</p>
+</article>
+</div>
+<!-- END: Real-Time Live Transcription Overlay -->
+</section>
+<!-- END: Voice Mode Central Sphere -->
+<!-- BEGIN: Bottom Interaction Controls & Navigation Bar -->
+<footer class="relative z-30 pb-3 pt-2 px-6 flex flex-col items-center" data-purpose="bottom-control-cluster">
+<!-- Primary Action Buttons Row -->
+<div class="flex items-center justify-between w-full mb-3.5 space-x-3">
+<!-- Left Pill: Text prompt alternative or conversation prompt status -->
+<button class="flex-1 h-14 bg-[#1c1c1e] hover:bg-[#252528] active:bg-[#2c2c30] text-zinc-400 hover:text-zinc-200 rounded-full px-5 flex items-center space-x-3 border border-zinc-800/60 transition-all text-left group" type="button">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-5 h-5 text-zinc-400 group-hover:text-white transition-colors stroke-[2.4]"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+<span class="text-[15px] font-medium text-zinc-300">Talk to ChatGPT</span>
+</button>
+<!-- Center Action: Mute / Unmute Microphone Button -->
+<button aria-label="Microphone" class="w-14 h-14 rounded-full bg-[#1c1c1e] hover:bg-[#252528] active:scale-95 border border-zinc-800/60 flex items-center justify-center transition-all flex-shrink-0" type="button"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg></button>
+<!-- Right Action: Disconnect / Close Voice Session Button -->
+<button aria-label="End conversation" class="w-14 h-14 rounded-full bg-white hover:bg-zinc-200 active:scale-95 flex items-center justify-center text-black transition-all flex-shrink-0 shadow-lg" type="button"><svg class="w-6 h-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+</div>
+<!-- iOS Home Indicator Pill -->
+<div aria-hidden="true" class="w-36 h-1 bg-white/90 rounded-full my-1.5"></div>
+</footer>
+<!-- END: Bottom Interaction Controls & Navigation Bar -->
+</main>
+<!-- END: Mobile Device Frame -->
+<!-- BEGIN: Interactive Icon Initializer -->
+<script data-purpose="icon-renderer">
+    // Render Lucide vector icons
+    lucide.createIcons();
+  </script>
+<!-- END: Interactive Icon Initializer -->
+
+
+
+
+</body></html>

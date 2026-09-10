@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>ChatGPT - Meet the new Voice</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#000000',
+              surface: '#212121',
+              surfaceHover: '#2f2f2f',
+              blue: '#0d7df2',
+              blueLight: '#3b82f6',
+              textMuted: '#8e8ea0',
+            }
+          },
+          fontFamily: {
+            sans: [
+              '-apple-system',
+              'BlinkMacSystemFont',
+              '"SF Pro Display"',
+              '"SF Pro Text"',
+              'system-ui',
+              'sans-serif'
+            ],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for specialized visual elements -->
+<style data-purpose="orb-animation-and-rendering">
+    /* Ethereal gradient orb mirroring the advanced voice mode sphere */
+    .voice-orb {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #a5b4fc 28%, #6366f1 55%, #3b82f6 78%, #1d4ed8 100%);
+      filter: blur(0.5px);
+      box-shadow: 
+        0 0 35px rgba(99, 102, 241, 0.45),
+        0 0 70px rgba(59, 130, 246, 0.25),
+        inset -6px -6px 16px rgba(15, 23, 42, 0.6),
+        inset 6px 6px 14px rgba(255, 255, 255, 0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .voice-orb::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      right: 12%;
+      width: 65%;
+      height: 65%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(199, 210, 254, 0.4) 40%, transparent 70%);
+      filter: blur(4px);
+    }
+  </style>
+<style data-purpose="native-ios-styling">
+    /* Smooth native feel & non-selectable UI */
+    body {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* iOS home bar indicator */
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #ffffff;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+<body class="bg-black text-white antialiased h-screen w-screen overflow-hidden flex flex-col justify-between select-none">
+<!-- BEGIN: TopStatusBar -->
+<!-- iOS Native Status Bar (Dark Mode with App Store breadcrumb) -->
+<header class="w-full pt-3 flex justify-between items-center z-50 text-white font-medium px-8">
+<!-- Left: Time & Breadcrumb -->
+<div class="flex items-center space-x-1">
+<span class="text-[15px] font-semibold tracking-tight">7:07</span>
+
+</div>
+<!-- Right: Cellular, WiFi, Battery Icons -->
+<div class="flex items-center space-x-2">
+<!-- Cellular -->
+<svg class="w-4 h-3 fill-current" viewBox="0 0 17 12">
+<rect height="3" rx="0.5" width="2.5" x="0" y="9"></rect>
+<rect height="5.5" rx="0.5" width="2.5" x="4" y="6.5"></rect>
+<rect height="8.5" rx="0.5" width="2.5" x="8" y="3.5"></rect>
+<rect height="12" rx="0.5" width="2.5" x="12" y="0"></rect>
+</svg>
+<!-- WiFi -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 16 12">
+<path d="M8 9.6a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zm5.28-4.28a7.46 7.46 0 0 0-10.56 0 .75.75 0 0 0 1.06 1.06 5.96 5.96 0 0 1 8.44 0 .75.75 0 0 0 1.06-1.06zm2.65-2.65a11.2 11.2 0 0 0-15.86 0 .75.75 0 1 0 1.06 1.06 9.7 9.7 0 0 1 13.74 0 .75.75 0 0 0 1.06-1.06z"></path>
+</svg>
+<!-- Battery -->
+<div class="relative flex items-center">
+<div class="w-[23px] h-[11.5px] border border-white/80 rounded-[3px] p-[1.5px] flex items-center">
+<div class="h-full w-full bg-white rounded-[1.5px]"></div>
+</div>
+<div class="w-[1.5px] h-[4px] bg-white/80 rounded-r-[1px] ml-[1px]"></div>
+</div>
+</div>
+</header>
+<!-- END: TopStatusBar -->
+<!-- BEGIN: TopHeaderNavigation -->
+<!-- Top Action Navigation: Menu, Upgrade Pill, New Chat Bubble -->
+<nav class="w-full px-5 pt-3 pb-2 flex items-center justify-between z-40">
+<!-- Menu Button (Sidebar Toggle) -->
+<button aria-label="Open sidebar" class="w-11 h-11 rounded-full bg-[#212121] active:bg-[#2f2f2f] flex items-center justify-center transition-colors" type="button">
+<div class="flex flex-col space-y-1.5 items-center justify-center">
+<span class="w-4 h-[2px] bg-white rounded-full"></span>
+<span class="w-4 h-[2px] bg-white rounded-full"></span>
+</div>
+</button>
+<!-- Upgrade Pill -->
+<button class="h-10 px-4 rounded-full bg-[#182334] border border-[#203a5c] active:bg-[#1e2f47] flex items-center space-x-1.5 transition-all shadow-sm" type="button">
+<svg class="w-4 h-4 text-[#38bdf8] fill-current" viewBox="0 0 24 24">
+<path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"></path>
+</svg>
+<span class="text-[14px] font-semibold text-[#38bdf8] tracking-tight">Upgrade</span>
+</button>
+<!-- New Chat Button -->
+<button aria-label="New chat" class="w-11 h-11 rounded-full bg-[#212121] active:bg-[#2f2f2f] flex items-center justify-center transition-colors" type="button">
+<svg class="w-5 h-5 text-white stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</nav>
+<!-- END: TopHeaderNavigation -->
+<!-- BEGIN: MainHeroVoicePromotion -->
+<!-- Center Hero: Glowing Orb, Announcement Title, Description, and CTA Button -->
+<main class="flex-1 flex flex-col items-center justify-center px-8 text-center -mt-8">
+<!-- Animated Voice Gradient Orb -->
+<div aria-label="Glowing Voice Orb" class="voice-orb mb-7" role="img"></div>
+<!-- Title -->
+<h1 class="text-[26px] font-bold text-white tracking-tight leading-snug mb-2.5">
+      Meet the new Voice
+    </h1>
+<!-- Subtitle / Explanatory Copy -->
+<p class="text-[17px] text-[#9ca3af] font-normal leading-relaxed max-w-[290px] mb-8">
+      More natural conversations, powered by our next-generation voice model
+    </p>
+<!-- Start Voice CTA Button -->
+<button class="bg-white text-black font-semibold text-[17px] px-8 py-3.5 rounded-full shadow-lg hover:bg-neutral-200 active:scale-95 transition-all duration-150" type="button">
+      Start Voice
+    </button>
+</main>
+<!-- END: MainHeroVoicePromotion -->
+<!-- BEGIN: BottomInputDock -->
+<!-- Floating Bottom Input Bar & Home Indicator -->
+<footer class="w-full px-4 pb-2 pt-2 flex flex-col items-center">
+<!-- Capsule Input Bar -->
+<div class="w-full bg-[#1e1e1e] border border-white/5 rounded-full h-[58px] flex items-center px-3 shadow-2xl">
+<!-- Plus Button -->
+<button aria-label="Add attachment" class="w-10 h-10 flex items-center justify-center rounded-full text-white/90 active:bg-white/10 transition-colors" type="button">
+<svg class="w-6 h-6 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Input Field / Placeholder -->
+<div class="flex-1 px-2.5 flex items-center text-[#8e8ea0] text-[16.5px] font-normal tracking-tight">Talk To ChatGPT</div>
+<!-- Right Action Icons: Microphone & Voice Waveform Button -->
+<div class="flex items-center space-x-2">
+<!-- Mic Button -->
+<button aria-label="Voice dictation" class="w-10 h-10 flex items-center justify-center rounded-full text-white/90 active:bg-white/10 transition-colors" type="button">
+<svg class="w-6 h-6 stroke-[1.8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15a3 3 0 003-3V6a3 3 0 00-3-3 3 3 0 00-3 3v6a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Waveform Audio Button -->
+<button aria-label="Activate Voice Mode" class="w-[42px] h-[42px] rounded-full bg-[#0d7df2] active:bg-[#0b6ad0] flex items-center justify-center shadow-md transition-transform active:scale-95" type="button">
+<!-- Voice Bars Waveform Icon -->
+<div class="flex items-center space-x-[2.5px] h-4">
+<span class="w-[2.5px] h-2.5 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-4 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-3 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-1.5 bg-white rounded-full"></span>
+</div>
+</button>
+</div>
+</div>
+<!-- iOS Home Bar Indicator -->
+
+</footer>
+<!-- END: BottomInputDock -->
+
+
+</body></html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html><html class="h-full bg-black" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ChatGPT Voice - End-to-End Encrypted</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              '-apple-system',
+              'BlinkMacSystemFont',
+              '"SF Pro Text"',
+              '"SF Pro Display"',
+              'Inter',
+              'system-ui',
+              'sans-serif'
+            ],
+          },
+          colors: {
+            brand: {
+              subtext: '#9E9E9E',
+              link: '#B3B3B3',
+              cardBg: '#1C1C1E',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Base Layout & Sphere Animation Styles -->
+<style data-purpose="orb-styling">
+    /* 3D Glowing Ambient Sphere mimicking the ChatGPT Voice visual asset */
+    .glowing-orb {
+      position: relative;
+      width: 176px;
+      height: 176px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 25%, #FFFFFF 0%, #DCE8FE 30%, #87ABF8 65%, #6B8CEF 85%, #5672D8 100%);
+      box-shadow: 
+        0 0 50px 20px rgba(108, 147, 246, 0.45),
+        0 0 100px 50px rgba(78, 115, 230, 0.25),
+        inset -12px -16px 28px rgba(35, 60, 160, 0.4),
+        inset 6px 6px 16px rgba(255, 255, 255, 0.85);
+    }
+  </style>
+<!-- Typography & Layout Styles -->
+<style data-purpose="typography-adjustments">
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+</head>
+<body class="bg-black text-white h-full flex justify-center items-center overflow-x-hidden select-none">
+<!-- BEGIN: MobileDeviceFrame -->
+<div class="relative w-full max-w-[393px] h-full max-h-[852px] bg-black flex flex-col justify-between overflow-hidden px-6 pt-3 pb-2 shadow-2xl">
+<!-- BEGIN: iOSStatusBar -->
+<header class="w-full flex items-center justify-between pt-1 pb-2 z-20">
+<!-- Time -->
+<span class="text-[15px] font-semibold tracking-tight text-white pl-2">7:07</span>
+<!-- Status Icons: Cellular, Wi-Fi, Battery -->
+<div class="flex items-center space-x-[6px] pr-2">
+<!-- Cellular Signal Icon -->
+<svg class="w-4 h-3.5 fill-current text-white" viewBox="0 0 17 12">
+<rect height="3.5" rx="0.7" width="2.8" x="0.5" y="8.5"></rect>
+<rect height="6.2" rx="0.7" width="2.8" x="5" y="5.8"></rect>
+<rect height="9" rx="0.7" width="2.8" x="9.5" y="3"></rect>
+<rect height="11.8" rx="0.7" width="2.8" x="14" y="0.2"></rect>
+</svg>
+<!-- Wi-Fi Icon -->
+<svg class="w-4 h-3.5 fill-current text-white" viewBox="0 0 16 12">
+<path d="M8 12a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8Zm4.6-4.2a6.48 6.48 0 0 0-9.2 0 .9.9 0 0 1-1.27-1.27 8.28 8.28 0 0 1 11.74 0 .9.9 0 0 1-1.27 1.27Zm2.6-2.6a10.15 10.15 0 0 0-14.4 0 .9.9 0 1 1-1.27-1.27 11.95 11.95 0 0 1 16.94 0 .9.9 0 1 1-1.27 1.27Z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="flex items-center">
+<div class="w-6 h-[11.5px] border border-white/80 rounded-[3.5px] p-[1.5px] flex items-center">
+<div class="h-full w-full bg-white rounded-[1.5px]"></div>
+</div>
+<div class="w-[1.5px] h-1 bg-white/80 rounded-r-[1px] ml-[1px]"></div>
+</div>
+</div>
+</header>
+<!-- END: iOSStatusBar -->
+<!-- BEGIN: TopDismissButton -->
+<div class="w-full flex justify-end pt-1 pr-1 z-20">
+<button aria-label="Close" class="w-9 h-9 rounded-full bg-[#1F1F21] active:bg-[#2C2C2E] flex items-center justify-center transition-colors">
+<svg class="w-4 h-4 text-neutral-300 stroke-[2.4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- END: TopDismissButton -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col items-center justify-start pt-1 pb-4">
+<!-- Visual Glowing Orb -->
+<div class="my-6 flex justify-center items-center" data-purpose="voice-visualizer-orb">
+<div class="glowing-orb"></div>
+</div>
+<!-- Main Headline -->
+<h1 class="text-[31px] leading-[1.2] font-bold text-center tracking-tight text-white mb-8 px-2 max-w-[340px]">Security and Control</h1>
+<!-- Feature Bullet Points List -->
+<section aria-label="Security Features" class="w-full space-y-6 px-3">
+<!-- Feature Item 1: Shield / Lock -->
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 mt-0.5 text-white">
+<!-- Shield Lock Icon -->
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex-1">
+<p class="text-[15px] leading-[1.38] text-white/95 font-normal tracking-[-0.01em]"><span class="font-medium text-white">Full Encryption:</span> Your audio is securely encrypted while traveling to our servers and whenever it is stored.</p>
+</div>
+</div>
+<!-- Feature Item 2: Waveform / Cryptography -->
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 mt-0.5 text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div class="flex-1">
+<p class="text-[15px] leading-[1.38] text-white/95 font-normal tracking-[-0.01em]"><span class="font-medium text-white">You’re in Control:</span> You can opt out of data training or delete your voice history at any time in your Account Settings.</p>
+</div>
+</div>
+</section>
+<!-- Security / Learn More Link -->
+<div class="mt-8 text-center">
+<a class="text-[14px] text-neutral-400 hover:text-neutral-200 underline underline-offset-4 decoration-neutral-500 font-normal transition-colors" href="#learn-more">
+          Learn more about voice security &amp; encryption
+        </a>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: BottomActionsArea -->
+<footer class="w-full flex flex-col items-center pt-2 pb-1">
+<button class="w-full h-[58px] bg-white text-black font-semibold text-[17px] rounded-full flex items-center justify-center active:scale-[0.985] active:bg-neutral-200 transition-all duration-150">
+        Start Conversation
+      </button>
+<div class="w-full flex justify-center pt-5 pb-2">
+<div class="w-36 h-1 bg-white rounded-full"></div>
+</div>
+</footer>
+<!-- END: BottomActionsArea -->
+</div>
+<!-- END: MobileDeviceFrame -->
+
+
+</body></html>

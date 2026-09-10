@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Roboto, system-ui, sans-serif;
+
+  --color-surface: #000000;
+  --color-surface-dim: #131313;
+  --color-chip: #1e1e1e;
+  --color-chip-pressed: #2c2c2c;
+  --color-card: #262626;
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #c4c7c8;
+  --color-muted: #929292;
+  --color-subtle: #717171;
+  --color-dot-inactive: #3a3a3c;
+  --color-outline-variant: #444748;
+
+  --color-cta: #1f7cf5;
+  --color-accent: #4f9cf9;
+  --color-user-bubble: #14467c;
+
+  --color-orb-light: #a8c2ff;
+  --color-orb-mid: #7697ff;
+  --color-orb-base: #5672ea;
+  --color-orb-deep: #3d4fad;
+
+  --color-listening: #34c77b;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    outline: none;
+  }
+}
+
+/* --- motion --- */
+
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 28px rgba(110, 150, 255, 0.28));
+  }
+  50% {
+    transform: scale(1.025);
+    filter: drop-shadow(0 0 42px rgba(140, 175, 255, 0.42));
+  }
+}
+
+@keyframes orb-listen {
+  0%,
+  100% {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 40px rgba(140, 175, 255, 0.5));
+  }
+  50% {
+    transform: scale(1.07);
+    filter: drop-shadow(0 0 60px rgba(160, 190, 255, 0.65));
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-orb-breathe {
+  animation: orb-breathe 5s ease-in-out infinite;
+}
+.animate-orb-listen {
+  animation: orb-listen 1.6s ease-in-out infinite;
+}
+.animate-caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+.animate-rise {
+  animation: rise-in 0.28s ease-out both;
+}
+.animate-toast {
+  animation: toast-in 0.24s ease-out both;
+}
+.animate-sheet {
+  animation: sheet-in 0.26s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+.dot-pulse {
+  animation: dot-pulse 1.2s ease-in-out infinite;
+}

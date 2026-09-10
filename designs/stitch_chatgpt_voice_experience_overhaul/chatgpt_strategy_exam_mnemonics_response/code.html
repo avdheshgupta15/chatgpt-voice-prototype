@@ -1,0 +1,192 @@
+<!DOCTYPE html><html class="h-full bg-black" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>ChatGPT Mobile Interface</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="layout-utilities">
+    /* Hide scrollbars for seamless native appearance */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="h-full bg-black text-white flex justify-center items-center select-none overflow-hidden">
+<!-- BEGIN: MobileContainer -->
+<!-- Constrained mobile canvas simulating iPhone 15 Pro screen aspect ratio -->
+<div class="relative w-full max-w-[430px] h-full max-h-[932px] bg-black flex flex-col justify-between overflow-hidden shadow-2xl" data-purpose="mobile-viewport">
+<!-- BEGIN: iOSStatusBar -->
+<header class="w-full pt-3 px-8 flex justify-between items-center z-50 select-none text-white" data-purpose="status-bar">
+<!-- Time -->
+<span class="text-[17px] font-semibold tracking-tight">11:25</span>
+<!-- System Status Icons (Signal, Wi-Fi, Battery) -->
+<div class="flex items-center space-x-2">
+<!-- Cellular Signal -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 17 12">
+<rect height="3.5" rx="0.7" width="2.5" x="0" y="8.5"></rect>
+<rect height="6" rx="0.7" width="2.5" x="4" y="6"></rect>
+<rect height="9" rx="0.7" width="2.5" x="8" y="3"></rect>
+<rect height="12" rx="0.7" width="2.5" x="12" y="0"></rect>
+</svg>
+<!-- Wi-Fi Icon -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 16 12">
+<path d="M8 2.8c2.8 0 5.4 1.1 7.3 3 .4.4.4 1 0 1.4-.4.4-1 .4-1.4 0-1.6-1.5-3.7-2.4-5.9-2.4S3.7 5.7 2.1 7.2c-.4.4-1 .4-1.4 0s-.4-1 0-1.4C2.6 3.9 5.2 2.8 8 2.8zm0 4.2c1.7 0 3.3.7 4.5 1.9.4.4.4 1 0 1.4s-1 .4-1.4 0c-.8-.8-1.9-1.3-3.1-1.3s-2.3.5-3.1 1.3c-.4.4-1 .4-1.4 0s-.4-1 0-1.4C4.7 7.7 6.3 7 8 7zm0 4.1a1.6 1.6 0 1 1 0 3.2 1.6 1.6 0 0 1 0-3.2z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="flex items-center">
+<div class="w-[23px] h-[12px] border border-white/80 rounded-[4px] p-[1.5px] flex items-center">
+<div class="h-full w-full bg-white rounded-[2px]"></div>
+</div>
+<div class="w-[1.5px] h-[4.5px] bg-white/80 rounded-r-[1px] ml-[1px]"></div>
+</div>
+</div>
+</header>
+<!-- END: iOSStatusBar -->
+<!-- BEGIN: NavigationBar -->
+<nav class="w-full px-4 pt-2.5 pb-2 flex justify-between items-center z-40 bg-black" data-purpose="chat-header">
+<!-- Left side: Hamburger menu drawer icon -->
+<div class="flex items-center space-x-3">
+<button aria-label="Open sidebar" class="w-10 h-10 rounded-full bg-[#212121] flex items-center justify-center text-gray-200 active:opacity-70 transition-opacity">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24">
+<line x1="4" x2="20" y1="8" y2="8"></line>
+<line x1="4" x2="16" y1="16" y2="16"></line>
+</svg>
+</button>
+<!-- Action icons (hidden partially in snapshot context, faint icons visible) -->
+<button aria-label="Dislike message" class="text-neutral-500 hover:text-neutral-300 p-1 opacity-40">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h8.018a2 2 0 012 2v6a2 2 0 01-2 2h-1.5l.8 3.2a1.5 1.5 0 01-1.458 1.8h-1.6c-.6 0-1.2-.3-1.5-.8L10 14z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<button aria-label="Share" class="text-neutral-500 hover:text-neutral-300 p-1 opacity-40">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 4v12m0-12l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Right side: New Chat / Context pill -->
+<div class="flex items-center space-x-1 bg-[#212121] rounded-full px-3 py-1.5">
+<!-- New chat pen icon -->
+<button aria-label="Compose new chat" class="p-1 text-white hover:text-gray-300 active:opacity-70">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+</svg>
+</button>
+<!-- More options icon -->
+<button aria-label="Chat options" class="p-1 ml-1 text-white hover:text-gray-300 active:opacity-70">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<circle cx="5" cy="12" r="2"></circle>
+<circle cx="12" cy="12" r="2"></circle>
+<circle cx="19" cy="12" r="2"></circle>
+</svg>
+</button>
+</div>
+</nav>
+<!-- END: NavigationBar -->
+<!-- BEGIN: ChatHistory -->
+<main class="flex-1 overflow-y-auto px-4 pt-4 pb-24 no-scrollbar space-y-7 relative" data-purpose="chat-messages-container">
+<!-- User Query Bubble -->
+<div class="flex justify-end" data-purpose="user-message-row">
+<div class="bg-[#0B3C68] text-white text-[16px] leading-[1.38] font-normal px-4 py-3 rounded-[22px] max-w-[85%] break-words">
+          What's a quick way to remember manga five forces before my strategy exam
+        </div>
+</div>
+<!-- ChatGPT Response Content -->
+<article class="text-white space-y-4 px-1 leading-relaxed" data-purpose="assistant-message">
+<!-- Opening Line -->
+<p class="text-[17px] leading-normal font-normal">
+          Absolutely — use <strong class="font-semibold">“C-R-S-B-S”</strong>:
+        </p>
+<!-- Section Title -->
+<h2 class="text-[18px] font-bold tracking-tight pt-2">
+          Manga Five Forces =
+        </h2>
+<!-- Numbered Breakdown List -->
+<ol class="space-y-3 text-[17px] leading-[1.4] text-neutral-100 pl-0.5">
+<li class="flex items-start">
+<span class="mr-2 font-normal text-white">1.</span>
+<span class=""><strong class="font-semibold text-white">Competitors</strong> — rivalry among existing firms</span>
+</li>
+<li class="flex items-start">
+<span class="mr-2 font-normal text-white">2.</span>
+<span class=""><strong class="font-semibold text-white">Rivals/new entrants</strong> — threat of new entrants</span>
+</li>
+<li class="flex items-start">
+<span class="mr-2 font-normal text-white">3.</span>
+<span class=""><strong class="font-semibold text-white">Suppliers</strong> — bargaining power of suppliers</span>
+</li>
+<li class="flex items-start">
+<span class="mr-2 font-normal text-white">4.</span>
+<span class=""><strong class="font-semibold text-white">Buyers</strong> — bargaining power of customers</span>
+</li>
+<li class="flex items-start">
+<span class="mr-2 font-normal text-white">5.</span>
+<span class=""><strong class="font-semibold text-white">Substitutes</strong> — threat of substitutes</span>
+</li>
+</ol>
+<!-- Mnemonic Header with Brain Emoji -->
+
+<!-- Mnemonic Sentence -->
+
+<!-- Partially cut-off teaser paragraph with faded text at the bottom -->
+
+</article><div class="w-full mt-4" data-purpose="conversation-feedback-banner"><div class="bg-[#212121] rounded-2xl px-4 py-3 flex items-center justify-between text-neutral-300 shadow-sm"><span class="text-[15px] font-normal tracking-tight text-neutral-200">How was this conversation?</span><div class="flex items-center space-x-3 text-neutral-300"><button aria-label="Rate conversation bad" class="p-1 hover:text-white transition-colors active:scale-95" type="button"><svg class="w-5 h-5 fill-none stroke-current" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.367 13.5c-.806 0-1.533.446-2.031 1.08a9.041 9.041 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.498 4.498 0 0 0-.322 1.672V21a.75.75 0 0 1-.75.75 2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H4.492c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 2.37 14.5c0-2.82 1.002-5.407 2.649-7.521.388-.482.987-.729 1.605-.729h5.896c.483 0 .964.078 1.423.23l3.114 1.04c.459.152.94.23 1.423.23h2.27A2.25 2.25 0 0 1 21 8.25V12a2.25 2.25 0 0 1-2.25 2.25h-1.383z"></path></svg></button><button aria-label="Rate conversation good" class="p-1 hover:text-white transition-colors active:scale-95" type="button"><svg class="w-5 h-5 fill-none stroke-current" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V3a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.25A2.25 2.25 0 0 1 3 15.75V12a2.25 2.25 0 0 1 2.25-2.25h1.383z"></path></svg></button></div></div></div>
+<!-- Scroll to bottom / down arrow floating button indicator -->
+
+</main>
+<!-- END: ChatHistory -->
+<!-- BEGIN: InputActionBar -->
+<footer class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black to-transparent pt-4 pb-7 px-4" data-purpose="message-input-bar">
+<div class="flex items-center space-x-2 bg-[#212121] rounded-full px-3.5 py-2.5 h-[52px] border border-[#303030]/50 shadow-lg">
+<!-- Plus Add Attachment Button -->
+<button aria-label="Add attachment" class="w-8 h-8 rounded-full text-white/90 hover:text-white flex items-center justify-center shrink-0 active:opacity-70">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+</button>
+<!-- Text Input Placeholder -->
+<div class="flex-1 text-[16px] text-neutral-400 font-normal select-none px-1">Talk to ChatGPT</div>
+<!-- Voice / Microphone Icon -->
+<button aria-label="Dictate message" class="text-white hover:text-gray-200 px-1 shrink-0 active:opacity-70">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+<line x1="12" x2="12" y1="19" y2="23"></line>
+<line x1="8" x2="16" y1="23" y2="23"></line>
+</svg>
+</button>
+<!-- Live Audio Waveform Mode Button -->
+<button aria-label="Live Voice Mode" class="w-8 h-8 rounded-full bg-[#1b73e8] flex items-center justify-center shrink-0 active:scale-95 transition-transform shadow-md">
+<div class="flex items-center justify-center space-x-[2px] h-3.5">
+<span class="w-[2.5px] h-2 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-3.5 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-1.5 bg-white rounded-full"></span>
+<span class="w-[2.5px] h-3 bg-white rounded-full"></span>
+</div>
+</button>
+</div>
+<!-- iOS Home Indicator Bar -->
+<div class="w-32 h-1 bg-white/40 rounded-full mx-auto mt-4"></div>
+</footer>
+<!-- END: InputActionBar -->
+</div>
+<!-- END: MobileContainer -->
+
+
+
+
+</body></html>
